@@ -1,7 +1,7 @@
 import FeaturedPosts from "@/components/home-page/featured-posts";
 import Hero from "@/components/home-page/hero";
 
-const DUMMY_POSTS = [
+export const DUMMY_POSTS = [
   {
     slug: "getting-started-with-nextjs",
     title: "Getting started with nextjs",
