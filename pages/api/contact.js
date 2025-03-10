@@ -6,7 +6,6 @@ const MONGO_DB_URL = `mongodb+srv://${MONGODB_ID}:${MONGODB_PASSWORD}@free-and-s
 
 async function handler(req, res) {
   if (req.method === "POST") {
-    console.log(req.body);
     const { email, name, message } = req.body;
 
     if (
