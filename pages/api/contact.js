@@ -1,6 +1,8 @@
 function handler(req, res) {
   if (req.method === "POST") {
+    console.log(req.body);
     const { email, name, message } = req.body;
+
     if (
       !email ||
       !email.includes("@") ||
