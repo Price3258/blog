@@ -10,12 +10,13 @@ const DUMMY_POST = {
   content: "# This is a first post",
 };
 
-export default function PostContent() {
-  const imagePath = `/images/posts/${DUMMY_POST.slug}/${DUMMY_POST.image}`;
+export default function PostContent(props) {
+  const { post } = props;
+  const imagePath = `/images/posts/${post.slug}/${post.image}`;
   return (
     <article className={classes.content}>
-      <PostHeader title={DUMMY_POST.title} image={imagePath} />
-      <ReactMarkDown>{DUMMY_POST.content}</ReactMarkDown>
+      <PostHeader title={post.title} image={imagePath} />
+      <ReactMarkDown>{post.content}</ReactMarkDown>
     </article>
   );
 }
