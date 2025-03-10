@@ -1,8 +1,13 @@
 import { MongoClient } from "mongodb";
 
-import { MONGODB_ID, MONGODB_PASSWORD } from "@/lib/constant";
+import {
+  MONGODB_CLUSTER,
+  MONGODB_DB_NAME,
+  MONGODB_ID,
+  MONGODB_PASSWORD,
+} from "@/lib/constant";
 
-const MONGO_DB_URL = `mongodb+srv://${MONGODB_ID}:${MONGODB_PASSWORD}@free-and-sample.k3x69.mongodb.net/blog?retryWrites=true&w=majority&appName=free-and-sample`;
+const MONGO_DB_URL = `mongodb+srv://${MONGODB_ID}:${MONGODB_PASSWORD}@${MONGODB_CLUSTER}.k3x69.mongodb.net/${MONGODB_DB_NAME}?retryWrites=true&w=majority&appName=${MONGODB_CLUSTER}`;
 
 async function handler(req, res) {
   if (req.method === "POST") {
