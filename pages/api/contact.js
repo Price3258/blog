@@ -1,4 +1,10 @@
-function handler(req, res) {
+import { MongoClient } from "mongodb";
+
+import { MONGO_DB_ID, MONGO_DB_PASSWORD } from "@/lib/constant";
+
+const MONGO_DB_URL = `mongodb+srv://${MONGO_DB_ID}:${MONGO_DB_PASSWORD}@free-and-sample.k3x69.mongodb.net/blog?retryWrites=true&w=majority&appName=free-and-sample`;
+
+async function handler(req, res) {
   if (req.method === "POST") {
     console.log(req.body);
     const { email, name, message } = req.body;
@@ -19,6 +25,29 @@ function handler(req, res) {
       name,
       message,
     };
+
+    let client;
+    try {
+      client = await MongoClient.connect(MONGO_DB_URL);
+    } catch (error) {
+      client.close();
+      res.status(500).json({ message: "Storing message failed!" });
+      return;
+    }
+
+    const db = client.db();
+
+    try {
+      const result = await db.collection("messages").insertOne(newMessage);
+      newMessage.id = result.insertedId;
+    } catch (error) {
+      client.close();
+      res.status(500).json({ message: "Storing message failed!" });
+      return;
+    }
+
+    client.close();
+
     res
       .status(201)
       .json({ message: "Successfully stored message!", message: newMessage });
